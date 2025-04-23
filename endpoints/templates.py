@@ -4,3 +4,6 @@ class TemplatesAPI:
 
     def list(self):
         return self.client._request("GET", "/template")
+
+    def get(self, template_id):
+        return self.client._request("GET", f"/template/{template_id}")
