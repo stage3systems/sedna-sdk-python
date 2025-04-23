@@ -3,4 +3,4 @@ class JobReferencesAPI:
         self.client = client
 
     def list(self):
-        return self.client._request("GET", "/job-references")
+        return self.client._request("GET", "/job-reference")
