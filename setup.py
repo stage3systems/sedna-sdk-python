@@ -6,6 +6,8 @@ setup(
     packages=find_packages(),
     description='Sedna Python SDK for communicating with Sedna API',
     author='Stage3 Systems',
-    install_requires=[],
+    install_requires=[
+        "requests>=2.28.0",
+    ],
     python_requires='>=3.9',
 )
