@@ -1,9 +1,9 @@
 import base64
 import requests
-from endpoints.templates import TemplatesAPI
-from endpoints.users import UsersAPI
-from endpoints.comments import CommentsAPI
-from endpoints.job_references import JobReferencesAPI
+from .endpoints.templates import TemplatesAPI
+from .endpoints.users import UsersAPI
+from .endpoints.comments import CommentsAPI
+from .endpoints.job_references import JobReferencesAPI
 
 class SednaAPIError(Exception):
     def __init__(self, status_code, message):
