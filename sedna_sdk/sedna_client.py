@@ -5,6 +5,7 @@ from .endpoints.users import UsersAPI
 from .endpoints.comments import CommentsAPI
 from .endpoints.job_references import JobReferencesAPI
 from .endpoints.teams import TeamsAPI
+from .endpoints.contacts import ContactsAPI
 
 class SednaAPIError(Exception):
     def __init__(self, status_code, message):
@@ -23,6 +24,7 @@ class SednaClient:
         }
 
         # Submodules
+        self.contacts = ContactsAPI(self)
         self.teams = TeamsAPI(self)
         self.templates = TemplatesAPI(self)
         self.users = UsersAPI(self)
