@@ -13,8 +13,11 @@ class SednaAPIError(Exception):
         self.message = message
 
 class SednaClient:
-    def __init__(self, subdomain, client_id, client_secret):
-        self.base_url = f"https://{subdomain}.sednanetwork.com/platform/2019-01-01"
+    def __init__(self, subdomain_or_url, client_id, client_secret):
+        if subdomain_or_url.startswith('http://') or subdomain_or_url.startswith('https://'):
+            self.base_url = subdomain_or_url.rstrip('/')
+        else:
+            self.base_url = f"https://{subdomain_or_url}.sednanetwork.com/platform/2019-01-01"
         credentials = f"{client_id}:{client_secret}"
         encoded = base64.b64encode(credentials.encode()).decode()
         self.headers = {
