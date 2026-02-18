@@ -5,5 +5,8 @@ class TemplatesAPI:
     def list(self):
         return self.client._request("GET", "/template")
 
-    def get(self, template_id):
-        return self.client._request("GET", f"/template/{template_id}")
+    def get(self, template_id: str, include_doc: bool = False):
+        if not include_doc:
+            return self.client._request("GET", f"/template/{template_id}")
+        return self.client._request("GET", f"/template/{template_id}?include=documents")
+
