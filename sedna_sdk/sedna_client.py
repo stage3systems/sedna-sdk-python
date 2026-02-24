@@ -40,3 +40,12 @@ class SednaClient:
         if response.content:
             return response.json()
         return None
+
+    def _raw_request(self, method, endpoint, **kwargs):
+        url = f"{self.base_url}{endpoint}"
+        response = requests.request(method, url, headers=self.headers, **kwargs)
+
+        if not response.ok:
+            raise SednaAPIError(response.status_code, response.text)
+
+        return response
