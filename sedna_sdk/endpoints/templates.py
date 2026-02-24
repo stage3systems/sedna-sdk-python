@@ -10,3 +10,5 @@ class TemplatesAPI:
             return self.client._request("GET", f"/template/{template_id}")
         return self.client._request("GET", f"/template/{template_id}?include=documents")
 
+    def download(self, doc_id: str):
+        return self.client._request("GET", f"/download/template/document/{doc_id}")
