@@ -14,7 +14,7 @@ class SednaAPIError(Exception):
         self.message = message
 
 class SednaClient:
-    def __init__(self, base_url: str = 'sednanetwork.com', subdomain: str, client_id: str, client_secret: str):
+    def __init__(self, subdomain: str, client_id: str, client_secret: str, base_url: str = 'sednanetwork.com'):
         self.base_url = f"https://{subdomain}.{base_url}/platform/2019-01-01"
         credentials = f"{client_id}:{client_secret}"
         encoded = base64.b64encode(credentials.encode()).decode()
