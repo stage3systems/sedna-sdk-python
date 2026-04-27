@@ -5,6 +5,7 @@ from .endpoints.users import UsersAPI
 from .endpoints.comments import CommentsAPI
 from .endpoints.job_references import JobReferencesAPI
 from .endpoints.teams import TeamsAPI
+from .endpoints.contacts import ContactsAPI
 
 class SednaAPIError(Exception):
     def __init__(self, status_code, message):
@@ -26,6 +27,7 @@ class SednaClient:
         }
 
         # Submodules
+        self.contacts = ContactsAPI(self)
         self.teams = TeamsAPI(self)
         self.templates = TemplatesAPI(self)
         self.users = UsersAPI(self)
@@ -44,3 +46,12 @@ class SednaClient:
         if response.content:
             return response.json()
         return None
+
+    def _raw_request(self, method, endpoint, **kwargs):
+        url = f"{self.base_url}{endpoint}"
+        response = requests.request(method, url, headers=self.headers, **kwargs)
+
+        if not response.ok:
+            raise SednaAPIError(response.status_code, response.text)
+
+        return response
