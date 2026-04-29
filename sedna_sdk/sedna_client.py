@@ -6,6 +6,7 @@ from .endpoints.comments import CommentsAPI
 from .endpoints.job_references import JobReferencesAPI
 from .endpoints.teams import TeamsAPI
 from .endpoints.contacts import ContactsAPI
+from .endpoints.messages import MessagesAPI
 
 class SednaAPIError(Exception):
     def __init__(self, status_code, message):
@@ -34,6 +35,7 @@ class SednaClient:
         self.users = UsersAPI(self)
         self.comments = CommentsAPI(self)
         self.job_references = JobReferencesAPI(self)
+        self.messages = MessagesAPI(self)
 
     def set_base_url(self, base_url):
         self.base_url = base_url.rstrip('/')
