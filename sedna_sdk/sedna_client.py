@@ -15,7 +15,11 @@ class SednaAPIError(Exception):
 
 class SednaClient:
     def __init__(self, subdomain: str, client_id: str, client_secret: str, base_url: str = 'sednanetwork.com'):
-        self.base_url = f"https://{subdomain}.{base_url}/platform/2019-01-01"
+        if subdomain.startswith('http://') or subdomain.startswith('https://'):
+            self.base_url = subdomain.rstrip('/')
+        else:
+            self.base_url = f"https://{subdomain}.{base_url}/platform/2019-01-01"
+
         credentials = f"{client_id}:{client_secret}"
         encoded = base64.b64encode(credentials.encode()).decode()
         self.headers = {
@@ -30,6 +34,9 @@ class SednaClient:
         self.users = UsersAPI(self)
         self.comments = CommentsAPI(self)
         self.job_references = JobReferencesAPI(self)
+
+    def set_base_url(self, base_url):
+        self.base_url = base_url.rstrip('/')
 
     def _request(self, method, endpoint, **kwargs):
         url = f"{self.base_url}{endpoint}"
